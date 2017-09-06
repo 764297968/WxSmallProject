@@ -1,0 +1,38 @@
+<!--pages/NewsShow/NewsShow.wxml-->
+ <import src="/wxSearch/wxSearch.wxml"/>
+
+<view class="wxSearch-section">
+  <view class="wxSearch-pancel">
+    <input bindinput="wxSearchInput" bindfocus="wxSerchFocus"  value="{{wxSearchData.value}}" bindblur="wxSearchBlur" class="wxSearch-input" placeholder="搜索" />
+    <button class="wxSearch-button" bindtap="wxSearchFn" size="mini" plain="true">搜索</button>
+  </view>
+</view>
+<template is="wxSearch" data="{{wxSearchData}}"/>
+
+
+ 
+ <a href="javascript:void(0);" data-wareId="{{data.wareId}}"  bindtap="detail" wx:for="{{productdata}}" wx:for-item="data" class="weui-media-box weui-media-box_appmsg">
+                    <view class="weui-media-box__hd">
+                        <image class="weui-media-box__thumb1"  src="{{data.imageurl}}"  alt="" ></image>
+                    </view>
+                    <view class="weui-media-box__bd">
+                        <text class="weui-media-box__Title1 ">{{data.wname}}</text>
+                        <text class="weui-media-box__desc" >
+                        
+                        <block wx:for="{{data.customAttrList}}" wx:for-item="custom">{{custom}}</block >
+                        
+                        </text>
+                        <text class="big-price">¥{{data.jdPrice}}</text>
+                        
+                        <text  class="weui-media-box__desc" >
+                          <text  wx:if="{{data.self==true}}" class="self-sell">自营 </text>
+                       
+                        <block class="gray-pro-info-span">{{data.totalCount}}条评论</block>
+                        <block>好评{{data.good}}</block>
+                        </text>
+                        
+                    </view>
+                    
+                </a>
+
+<text>正在加载.....</text>

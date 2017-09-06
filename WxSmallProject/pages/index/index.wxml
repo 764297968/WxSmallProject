@@ -1,0 +1,22 @@
+<!--index.wxml-->
+<view class="container">
+  <view  bindtap="bindViewTap" class="userinfo">
+    <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+    <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+   <text class="userinfo-province">地址:{{userInfo.province}}</text>
+
+  </view>
+
+<button open-type="contact">打开客服</button>
+ 
+  <text   bindtap="bindtapmunu">{{motto}}\n</text>
+  <text   bindtap="bindtapnews">{{news}}</text>
+ <view> {{m1.message}} </view>
+
+</view>
+<!--wxml-->
+<wxs module="m1">
+var msg = "hello world";
+
+module.exports.message = msg;
+</wxs>

@@ -1,0 +1,18 @@
+{
+  "pages":[
+    "pages/ProductShow/ProductShow",
+    "pages/index/index",
+    "pages/logs/logs",
+    "pages/menu/menu",
+    "pages/PictureShow/PictureShow",
+   
+    "pages/ProductDetail/ProductDetail"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "",
+    "navigationBarTextStyle":"black",
+    "enablePullDownRefresh": true
+  }
+}

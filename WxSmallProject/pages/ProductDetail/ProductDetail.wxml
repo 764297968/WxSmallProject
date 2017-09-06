@@ -1,0 +1,23 @@
+<!--pages/ProductDetail/ProductDetail.wxml-->
+
+
+<swiper indicator-dots="{{indicatorDots}}"  
+        autoplay="{{autoplay}}" circular="{{circular}}"  interval="{{interval}}" duration="{{duration}}">  
+      <block wx:for="{{imgUrls}}" wx:for-item="url" >  
+        <swiper-item>  
+    
+            <image data-src="{{url}}" bindtap="previewImage" src="{{url}}" class="slide-image" width="355" height="150"></image>  
+       
+        </swiper-item>  
+      </block>  
+</swiper>  
+<import src="../../wxParse/wxParse.wxml"/> 
+<view class="wxParse">
+    <template is="wxParse" data="{{wxParseData:article.nodes}}"/>
+</view>
+
+<view style="padding: 20px 10px; background-color:#eee;">
+    <block wx:for="{{replyTemArray}}" wx:key="">
+         <template is="wxParse" data="{{wxParseData:item}}"/>
+    </block>
+</view>
