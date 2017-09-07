@@ -1,0 +1,92 @@
+<view style="height: 40px;">
+  <view data-name="recommend" bindtap='showNavigation' class="navigation {{select=='recommend'?'active':''}}">推荐音乐</view>
+  <view data-name="husband" bindtap='showNavigation' class="navigation {{select=='husband'?'active':''}}">热歌榜</view>
+  <view data-name="search" bindtap='showNavigation' class="navigation {{select=='search'?'active':''}}">搜索</view>
+</view>
+
+
+
+
+<!--推荐-->
+<view name="recommend" wx:if="{{currentShow=='recommend'}}">
+  <view class='recommendcon'>
+    <text style=' margin-top:100px;' class="stitle">推荐歌单</text>
+  </view>
+  <view class='remd_songs'>
+    <view class='recomimg' wx:for="{{song.HomeRecommend.data._list[0]}}" wx:for-item="s">
+      <view class='imgcon'>
+        <image src='{{s.picUrl}}'></image>
+        <text class='musicnum'>{{s.playCount}}</text>
+        <text class='imgtext'>\n{{s.name}}</text>
+      </view>
+    </view>
+     <view class='recomimg' wx:for="{{song.HomeRecommend.data._list[1]}}" wx:for-item="s">
+      <view class='imgcon'>
+        <image src='{{s.picUrl}}'></image>
+        <text class='musicnum'>{{s.playCount}}</text>
+        <text class='imgtext'>\n{{s.name}}</text>
+      </view>
+    </view>
+  </view>
+  <view class='recommendcon'>
+    <text style=' margin-top:100px;' class="stitle">最新音乐</text>
+  </view>
+   <scroll-view scroll-y="true" class="container">
+    <block wx:for="{{recommendsongs}}" wx:for-item="song">
+      <view class="block" bindtap="playTap" data-id="{{song.id}}">
+        <view class="left">
+          <image src="{{song.song.album.picUrl}}" mode="aspectFill" />
+        </view>
+        <view class="right">
+          <view class="content">
+            <view >
+              <text class="song-name">{{song.name}}</text>
+            </view>
+            <view>
+              <text class="song-artists" >{{song.song.album.artists[0].name}} - {{song.song.album.name}}</text>
+            </view>
+          </view>
+          <view class="play">
+            <image src="../../images/more.png" mode="scaleToFill" />
+          </view>
+        </view>
+      </view>
+    </block>
+  </scroll-view>
+</view>
+<!--热歌-->
+<view name="husband" wx:if="{{currentShow=='husband'}}">
+  <swiper autoplay>
+    <block wx:for="{{imgUrls}}">
+      <swiper-item>
+        <image src="{{item}}" class="slide-image" mode="aspectFill" />
+      </swiper-item>
+    </block>
+  </swiper>
+  <scroll-view scroll-y="true" class="container">
+    <block wx:for="{{recommends}}" wx:for-item="song">
+      <view class="block" bindtap="playTap" data-id="{{song.id}}">
+        <view class="left">
+          <image src="{{song.album.picUrl}}" lazy-load="true" mode="aspectFill" />
+        </view>
+        <view class="right">
+          <view class="content">
+            <view>
+              <text class="song-name">{{song.name}}</text>
+            </view>
+            <view>
+              <text class="song-artists">{{song.artists[0].name}} - {{song.album.name}}</text>
+            </view>
+          </view>
+          <view class="play">
+            <image src="../../images/more.png" mode="scaleToFill" />
+          </view>
+        </view>
+      </view>
+    </block>
+  </scroll-view>
+</view>
+<!--搜索-->
+<view name="search" wx:if="{{currentShow=='search'}}">
+  搜索
+</view>
