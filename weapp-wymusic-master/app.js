@@ -43,6 +43,7 @@ App({
             text: "搜索",
             name: "search"
           }
+<<<<<<< HEAD
         ],
         api:{
           sapiurl:"http://s.music.163.com",
@@ -53,5 +54,8 @@ App({
           newsonurl: "/personalized/newsong",
           detailurl: "/playlist/detail",
         }
+=======
+        ]
+>>>>>>> b6884995ca1232b3af40e0642fcfeede8dfae49d
     }
 })

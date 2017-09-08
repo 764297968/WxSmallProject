@@ -1,9 +1,13 @@
 //index.js
 var data = require('../../utils/data.js').songs;
+<<<<<<< HEAD
 var song = require('../../utils/data.js').song;
 var base64=require('../../utils/base64.js');
 var appdata = getApp().globalData;
 var apiurl=appdata.api;
+=======
+
+>>>>>>> b6884995ca1232b3af40e0642fcfeede8dfae49d
 Page({
 	data: {
 		imgUrls: [
@@ -11,6 +15,7 @@ Page({
 			'http://p4.music.126.net/n15ddawhY4cyIzFu23CSJA==/1401877341861315.jpg',
 			'http://p3.music.126.net/zMwH3zh33TAacyh2_4RjXw==/1375489062675977.jpg'
     ], currentShow: "recommend",
+<<<<<<< HEAD
     select: "recommend",
     recommendsongs:[],
     song: song
@@ -76,6 +81,39 @@ Page({
 		// // });
 
 		//wx.setStorageSync('ids', idsMap);
+=======
+    select: "recommend"
+    
+	},
+	onLoad: function() {
+
+		var rs = [],
+			idsMap = {},
+			keys = Object.keys(data),
+			len = keys.length;
+
+		for (var i = 0; i < len; i++) {
+			var k = keys[i];
+
+			rs.push(Object.assign({
+				id: k,
+			}, data[k]));
+
+			idsMap[k] = {
+				preid: i > 0 ? keys[i - 1] : 0,
+				nextid: i < len - 1 ? keys[i + 1] : 0
+			}
+		}
+
+		idsMap[keys[0]].preid = keys[len - 1];
+		idsMap[keys[len - 1]].nextid = keys[0];
+
+		this.setData({
+			recommends: rs
+		});
+
+		wx.setStorageSync('ids', idsMap);
+>>>>>>> b6884995ca1232b3af40e0642fcfeede8dfae49d
 	},
 	playTap: function(e) {
 		const dataset = e.currentTarget.dataset;
@@ -85,12 +123,18 @@ Page({
 	},
   showNavigation:function(event)
   {
+<<<<<<< HEAD
     var that=this;
+=======
+>>>>>>> b6884995ca1232b3af40e0642fcfeede8dfae49d
     var selectName = event.currentTarget.dataset.name;
     this.setData({
       currentShow: selectName,
       select: selectName
     });
+<<<<<<< HEAD
    console.log(that.data);
+=======
+>>>>>>> b6884995ca1232b3af40e0642fcfeede8dfae49d
   }
 })
