@@ -13,48 +13,37 @@
     <text style=' margin-top:100px;' class="stitle">推荐歌单</text>
   </view>
   <view class='remd_songs'>
-    <view class='recomimg'>
+    <view class='recomimg' wx:for="{{song.HomeRecommend.data._list[0]}}" wx:for-item="s">
       <view class='imgcon'>
-        <image src='http://p1.music.126.net/OQ8ZG1q0hCycZxHj7n-7Cg==/19013854579445576.webp?imageView&thumbnail=246x0&quality=75&tostatic=0&type=webp'></image>
-        <text class='musicnum'>13.8万</text>
-        <text class='imgtext'>\n老旧金典，值得细嗅。</text>
+        <image src='{{s.picUrl}}'></image>
+        <text class='musicnum'>{{s.playCount}}</text>
+        <text class='imgtext'>\n{{s.name}}</text>
       </view>
-
     </view>
-    <view class='recomimg'>
+     <view class='recomimg' wx:for="{{song.HomeRecommend.data._list[1]}}" wx:for-item="s">
       <view class='imgcon'>
-        <image src='http://p1.music.126.net/OQ8ZG1q0hCycZxHj7n-7Cg==/19013854579445576.webp?imageView&thumbnail=246x0&quality=75&tostatic=0&type=webp'></image>
-        <text class='musicnum'>13.8万</text>
-        <text class='imgtext'>\n老旧金典，值得细嗅。</text>
+        <image src='{{s.picUrl}}'></image>
+        <text class='musicnum'>{{s.playCount}}</text>
+        <text class='imgtext'>\n{{s.name}}</text>
       </view>
-
     </view>
-    <view class='recomimg'>
-      <view class='imgcon'>
-        <image src='http://p1.music.126.net/OQ8ZG1q0hCycZxHj7n-7Cg==/19013854579445576.webp?imageView&thumbnail=246x0&quality=75&tostatic=0&type=webp'></image>
-        <text class='musicnum'>13.8万</text>
-        <text class='imgtext'>\n老旧金典，值得细嗅。</text>
-      </view>
-
-    </view>
-
   </view>
   <view class='recommendcon'>
     <text style=' margin-top:100px;' class="stitle">最新音乐</text>
   </view>
    <scroll-view scroll-y="true" class="container">
-    <block wx:for="{{recommends}}" wx:for-item="song">
+    <block wx:for="{{recommendsongs}}" wx:for-item="song">
       <view class="block" bindtap="playTap" data-id="{{song.id}}">
         <view class="left">
-          <image src="{{song.album.picUrl}}" mode="aspectFill" />
+          <image src="{{song.song.album.picUrl}}" mode="aspectFill" />
         </view>
         <view class="right">
           <view class="content">
-            <view>
+            <view >
               <text class="song-name">{{song.name}}</text>
             </view>
             <view>
-              <text class="song-artists">{{song.artists}} - {{song.album.name}}</text>
+              <text class="song-artists" >{{song.song.album.artists[0].name}} - {{song.song.album.name}}</text>
             </view>
           </view>
           <view class="play">
@@ -78,7 +67,7 @@
     <block wx:for="{{recommends}}" wx:for-item="song">
       <view class="block" bindtap="playTap" data-id="{{song.id}}">
         <view class="left">
-          <image src="{{song.album.picUrl}}" mode="aspectFill" />
+          <image src="{{song.album.picUrl}}" lazy-load="true" mode="aspectFill" />
         </view>
         <view class="right">
           <view class="content">
@@ -86,7 +75,7 @@
               <text class="song-name">{{song.name}}</text>
             </view>
             <view>
-              <text class="song-artists">{{song.artists}} - {{song.album.name}}</text>
+              <text class="song-artists">{{song.artists[0].name}} - {{song.album.name}}</text>
             </view>
           </view>
           <view class="play">
@@ -98,6 +87,6 @@
   </scroll-view>
 </view>
 <!--搜索-->
-<view name="search" wx:if="{{currentShow=='husband'}}">
+<view name="search" wx:if="{{currentShow=='search'}}">
   搜索
 </view>
