@@ -1,8 +1,8 @@
 //index.js
 var data = require('../../utils/data.js').songs;
 var song = require('../../utils/data.js').song;
-var base64 = require('../../utils/base64.js');
-var appdata = getApp().globalData;
+var $=getApp();
+var appdata =$.globalData;
 var apiurl = appdata.api;
 Page({
   data: {
@@ -22,32 +22,32 @@ Page({
       //mask:true
     })
     //最新音乐
-    wx.request({
+    $.ajax({
       url: apiurl.apiurl + apiurl.newsonurl,
       method: "get",
-      dataType: "text",
-      success: function (res) {
-
-        var result = JSON.parse(JSON.parse(decodeURIComponent(res.data))).result;
+      dataType: "text"
+    }).then(
+       function (res) {
+        console.log(res);
+        var result = res.result;
         that.setData({
           recommendsongs: result
         })
 
-      }
-    })
+      })
     //热歌
-    wx.request({
+    $.ajax({
       url: apiurl.apiurl + apiurl.detailurl + "?id=3778678",
       method: "get",
-      dataType: "text",
-      success: function (res) {
-        wx.hideLoading()
-        var result = JSON.parse(JSON.parse(decodeURIComponent(res.data))).result;
-        console.log(result);
-        that.setData({
-          recommends: result.tracks.slice(0, 20),
-        });
-      }
+      dataType: "text"
+    }).then(function (res) {
+      wx.hideLoading()
+      console.log(res);
+      var result = res.result;
+      console.log(result);
+      that.setData({
+        recommends: result.tracks.slice(0, 20),
+      });
     })
     // var rs = [],
     // 	idsMap = {},

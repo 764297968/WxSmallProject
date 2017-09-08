@@ -48,10 +48,51 @@ App({
       sapiurl: "http://s.music.163.com",
       mapiurl: " http://music.163.com/api",
       //apiurl:"http://1x687f9296.iok.la",
-      apiurl: "http://192.168.0.122:8011",
+      apiurl: "http://music.163.com/api",
       searchurl: "/search/get",
       newsonurl: "/personalized/newsong",
       detailurl: "/playlist/detail",
     }
-  }
+  },
+  ajax(model) {
+    wx.showLoading({
+      title: '加载中',
+    })
+    //拼接url  
+    model.url = model.url;
+    //get参数拼接  
+    if (model.method == "get" && model.data !== undefined) {
+      for (let k in model.data) {
+        if (model.data[k].toString() !== '') {
+          model.url = model.url + "&" + k + "=" + model.data[k];
+        }
+      }
+      model.data = '';
+    }
+    //返回Promise对象  
+    return new Promise(
+      function (resolve) {
+        wx.request({
+          method: model.method,
+          url: model.url,
+          data: model.data,
+          dataType: model.dataType ? null : model.dataType,
+          success: (res) => {
+            wx.hideLoading()
+            if (res.statusCode == 200) {
+              console.log(res.data);
+              resolve(res.data);
+            } else {
+              //错误信息处理  
+              wx.showModal({
+                title: '提示',
+                content: '服务器错误，请联系客服',
+                showCancel: false,
+              })
+            }
+          }
+        })
+      }
+    )
+  },  
 })
