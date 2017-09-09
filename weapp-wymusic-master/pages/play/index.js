@@ -1,12 +1,14 @@
 var data = require('../../utils/data.js').songs;
 var favUtil = require('../../utils/fav.js');
 var strRe = /\[(\d{2}:\d{2})\.\d{2,}\](.*)/;
-
+var $ = getApp();
+var apiurl = $.globalData.api;
 Page({
 	data: {
 		toastHidden: true
 	},
 	onLoad: function(param) {
+    console.log(param);
 		this.setData({
 			currentId: param.id
 		})
@@ -154,6 +156,15 @@ Page({
 		});
 	},
 	reload: function(id) {
+    $.ajax({
+      url: apiurl.apiurl + apiurl.playerurl,
+      data:{
+        ids: [id]
+      },
+      method: "get",
+    }).then(function(res){
+      console.log(res);
+    })
 		var song = data[id] || {};
 
 		this.clearTurner();

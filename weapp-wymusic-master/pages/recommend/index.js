@@ -37,16 +37,14 @@ Page({
       })
     //热歌
     $.ajax({
-      url: apiurl.apiurl + apiurl.detailurl + "?id=3778678",
+      url: apiurl.apiurl + apiurl.detailurl + "?id=3778678&n=10",
       method: "get",
       dataType: "text"
     }).then(function (res) {
       wx.hideLoading()
       console.log(res);
-      var result = res.result;
-      console.log(result);
       that.setData({
-        recommends: result.tracks.slice(0, 20),
+        recommends: res.playlist.tracks,
       });
     })
     // var rs = [],

@@ -51,7 +51,8 @@ App({
       apiurl: "http://music.163.com/api",
       searchurl: "/search/get",
       newsonurl: "/personalized/newsong",
-      detailurl: "/playlist/detail",
+      detailurl: "/v3/playlist/detail",
+      playerurl:"/song/enhance/player/url",
     }
   },
   ajax(model) {
@@ -64,7 +65,7 @@ App({
     if (model.method == "get" && model.data !== undefined) {
       for (let k in model.data) {
         if (model.data[k].toString() !== '') {
-          model.url = model.url + "&" + k + "=" + model.data[k];
+          model.url = model.url + "?br=128000&" + k + "=" + model.data[k];
         }
       }
       model.data = '';
