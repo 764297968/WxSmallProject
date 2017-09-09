@@ -53,6 +53,7 @@ App({
       newsonurl: "/personalized/newsong",
       detailurl: "/v3/playlist/detail",
       playerurl:"/song/enhance/player/url",
+      lyricurl:"/song/lyric"
     }
   },
   ajax(model) {
@@ -63,11 +64,13 @@ App({
     model.url = model.url;
     //get参数拼接  
     if (model.method == "get" && model.data !== undefined) {
+      var urlstr="";
       for (let k in model.data) {
         if (model.data[k].toString() !== '') {
-          model.url = model.url + "?br=128000&" + k + "=" + model.data[k];
+          urlstr += "&" + k + "=" + model.data[k];
         }
       }
+      model.url = model.url+"?"+urlstr.substr(1);
       model.data = '';
     }
     //返回Promise对象  
@@ -81,7 +84,7 @@ App({
           success: (res) => {
             wx.hideLoading()
             if (res.statusCode == 200) {
-              console.log(res.data);
+              //console.log(res.data);
               resolve(res.data);
             } else {
               //错误信息处理  
@@ -96,4 +99,30 @@ App({
       }
     )
   },  
+  setStorage(key,value)
+  {
+    wx.setStorage({
+      key: key.toString(),
+      data: value,
+      success:function(res)
+      {
+        console.log("ok");
+      },fail:function(res)
+      {
+        console.log(res);
+      }
+    })
+  }, getStorage(key){
+     wx.getStorage({
+      key: key.toString(),
+      success:function(res)
+      {
+        console.log("ok");
+        return res.data;
+      },fail:function(err)
+      {
+        console.log(err);
+      }
+    })
+  }
 })

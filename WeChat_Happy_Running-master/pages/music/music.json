@@ -1,0 +1,23 @@
+{
+  
+    "navigationBarTitleText": "跑完步，来点Music放松一下",
+   "tabBar": {
+    
+
+    "list": [{
+      "pagePath": "pages/index",
+
+      "backgroundColor": "#ffeedd",
+       "iconPath":"/resources/yan1.jpg",
+       "selectedIconPath":"/resources/yan1.jpg"
+    }, {
+      "pagePath": "pages/logs/logs",
+
+       "iconPath":"/resources/yan2.jpg",
+       "selectedIconPath":"/resources/yan2.jpg"
+    }
+    ],
+    "color": "#ad8888",
+    "backgroundColor": "#fdfdae"
+  }
+}

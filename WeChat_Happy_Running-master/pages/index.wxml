@@ -1,0 +1,30 @@
+<view class="index">
+    <!--标题-->
+
+    <view class="header"  >
+       <view style="flex-direction:row;"> <image class="icon" src="/resources/fuckrun.png" mode="aspectFill"/></view>
+
+        <view class="bigTitle">Fucking Running</view>
+        <view class="desc">The First Program of HustWolf and XNC</view>
+    </view>
+
+    <view class="body">
+        <view class="widget">
+            <block wx:for="{{pageNames}}">
+                <view class="widgets__item">
+                    <navigator class="navigator-hover" url="{{item.id}}/{{item.id}}">{{item.name}}</navigator>
+                </view>
+            </block>
+        </view>
+    </view>
+</view>
+
+
+ <scroll-view scroll-y="true" style="height: 630rpx;" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
+
+<image  class="pic" src="/resources/run2.png" mode="aspectFill"/>
+<image  class="pic" src="/resources/run1.png" mode="aspectFill"/>
+<image  class="pic" src="/resources/run0.png" mode="aspectFill"/>
+
+
+</scroll-view>

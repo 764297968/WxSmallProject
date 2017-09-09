@@ -10,7 +10,8 @@
 <view class="footer">
 	<view class="progress">
 		<text>{{timeText}}</text>
-		<progress percent="{{per}}" color="red" stroke-width="4"/>
+		<!-- <progress percent="{{per}}" bindtap='changeprogress' color="red" stroke-width="4"/> -->
+     <slider class="slider" min="0" max="100" step="1" value="{{per}}" activeColor="red" bindtap="seek"></slider>
 		<text>{{durationText}}</text>
 	</view>
   	<view class="controls">

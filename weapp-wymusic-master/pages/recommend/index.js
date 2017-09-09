@@ -13,7 +13,7 @@ Page({
     ], currentShow: "recommend",
     select: "recommend",
     recommendsongs: [],
-    song: song
+    song: song,
   },
   onLoad: function () {
     var that = this;
@@ -41,8 +41,6 @@ Page({
       method: "get",
       dataType: "text"
     }).then(function (res) {
-      wx.hideLoading()
-      console.log(res);
       that.setData({
         recommends: res.playlist.tracks,
       });
@@ -76,6 +74,9 @@ Page({
   },
   playTap: function (e) {
     const dataset = e.currentTarget.dataset;
+    console.log(e);
+    wx.setStorageSync(dataset.id.toString(),dataset.song);
+    //return;
     wx.navigateTo({
       url: `../play/index?id=${dataset.id}`
     })
@@ -87,6 +88,5 @@ Page({
       currentShow: selectName,
       select: selectName
     });
-    console.log(that.data);
   }
 })

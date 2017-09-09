@@ -1,0 +1,44 @@
+
+<view class="header" style="flex-direction:row;">
+
+
+<swiper  class="swiper" indicator-dots="{{indicatorDots}}"
+  autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" width="100" height="10">
+    <swiper-item wx:for="{{imgUrls}}">
+      <image src="{{item}}" class="slide-image" class="banner" mode="fullToFill"/>
+    </swiper-item>
+</swiper>
+
+<view class="img">
+<image src="/resources/Carly.png" class="pic" ></image>
+
+</view>
+
+<view class="img1">
+
+
+<block wx:for="{{song}}" wx:key="id" class="audio">
+<block wx:if="{{item.musicid==count}}"> 
+<audio poster="{{item.poster}}" name="{{item.name}}" author="{{item.author}}" src="{{item.src}}" id="myAudio" controls="true">
+
+<view style="display:flex;flex-direction: row;">
+<button  type="primary" bindtap="audioPlay" class="button_anniu">Start</button>
+<button type="primary" bindtap="audioPause" class="button_anniu">Pause</button>
+<button type="primary" bindtap="audio14" class="button_anniu">To14s</button>
+<button type="primary" bindtap="audioStart" class="button_anniu">Stop</button>
+</view>
+
+<view style="display:flex;flex-direction: row;">
+<button type="primary" bindtap="NextMusic" class="button_anniu"> Next </button>
+<button  type="primary" bindtap="LastMusic" class="button_anniu">Last</button>
+</view>
+</audio>
+</block>
+</block>
+</view>
+
+
+
+</view>
+
+
