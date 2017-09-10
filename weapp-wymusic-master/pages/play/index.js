@@ -173,6 +173,7 @@ Page({
   reload: function (id) {
     var that = this;
     var song = that.data.song;//data[id] || {};
+    console.log(wx.getStorageSync(id));
     Object.assign(song, wx.getStorageSync(id));
     that.clearTurner();
     that.animation.translateY(0).step({

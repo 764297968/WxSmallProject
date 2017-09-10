@@ -13,7 +13,7 @@ Page({
           imageSrc: res.tempFilePath
         })
       },
-      fail: function({errMsg}) {
+      fail: function(errMsg) {
         console.log('downloadFile fail, err is:', errMsg)
       }
     })

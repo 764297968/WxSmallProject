@@ -73,9 +73,23 @@ Page({
     //wx.setStorageSync('ids', idsMap);
   },
   playTap: function (e) {
-    const dataset = e.currentTarget.dataset;
     console.log(e);
-    wx.setStorageSync(dataset.id.toString(),dataset.song);
+    //return;
+    const dataset = e.currentTarget.dataset;
+    wx.setStorageSync(dataset.id.toString(), dataset.song);
+    wx.navigateTo({
+      url: `../play/index?id=${dataset.id}`
+    })
+  },
+  newsongplayTap:function(e)
+  {
+    const dataset = e.currentTarget.dataset;
+    dataset.song.song.h={};
+    dataset.song.song.al={};
+    dataset.song.song.h.br=dataset.song.song.bMusic.bitrate;
+    dataset.song.song.al.picUrl = dataset.song.song.album.picUrl;
+    wx.setStorageSync(dataset.id.toString(), dataset.song.song);
+    console.log(e);
     //return;
     wx.navigateTo({
       url: `../play/index?id=${dataset.id}`

@@ -33,7 +33,7 @@
   </view>
    <scroll-view scroll-y="true" class="container">
     <block wx:for="{{recommendsongs}}" wx:for-item="song">
-      <view class="block" bindtap="playTap" data-id="{{song.id}}">
+      <view class="block" bindtap="newsongplayTap" data-id="{{song.id}}"  data-song="{{recommendsongs[index]}}">
         <view class="left">
           <image src="{{song.song.album.picUrl}}" mode="aspectFill" />
         </view>
