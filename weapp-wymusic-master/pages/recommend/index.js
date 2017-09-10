@@ -73,8 +73,6 @@ Page({
     //wx.setStorageSync('ids', idsMap);
   },
   playTap: function (e) {
-    console.log(e);
-    //return;
     const dataset = e.currentTarget.dataset;
     wx.setStorageSync(dataset.id.toString(), dataset.song);
     wx.navigateTo({
@@ -89,8 +87,6 @@ Page({
     dataset.song.song.h.br=dataset.song.song.bMusic.bitrate;
     dataset.song.song.al.picUrl = dataset.song.song.album.picUrl;
     wx.setStorageSync(dataset.id.toString(), dataset.song.song);
-    console.log(e);
-    //return;
     wx.navigateTo({
       url: `../play/index?id=${dataset.id}`
     })
@@ -102,5 +98,7 @@ Page({
       currentShow: selectName,
       select: selectName
     });
-  }
+  },
+  //搜索
+  
 })

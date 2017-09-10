@@ -173,7 +173,6 @@ Page({
   reload: function (id) {
     var that = this;
     var song = that.data.song;//data[id] || {};
-    console.log(wx.getStorageSync(id));
     Object.assign(song, wx.getStorageSync(id));
     that.clearTurner();
     that.animation.translateY(0).step({
@@ -214,15 +213,42 @@ Page({
         lyricList: that.getLyricList(song),
         favlist: favUtil.getFavList()
       });
+      var mp3url = $.checkStorage(id + "mp3");
+      if (!mp3url)
+      {
+        wx.downloadFile({
+          url: song.url,
+          success: function (res) {
+            console.log('downloadFile success, res is', res)
+            $.setStorage(id + "mp3", res.tempFilePath)
+          },
+          fail: function (errMsg) {
+            console.log('downloadFile fail, err is:', errMsg)
+          }
+        })
+      }else{
+        that.setData({
+          src:mp3url
+        });
+      }
       wx.setNavigationBarTitle({
         title: song.name
       });
+      // wx.playBackgroundAudio({
+      //   dataUrl: that.data.src,
+      //   title: song.name,
+      //   coverImgUrl: song.al.picUrl,
+      //   success: function (res) {
+      //     console.log(res);
+      //   },
+      //   fail: function (err) {
+      //     console.log(err);
+      //   }
+      // })
+      $.removeStorage(id);
     })
 
-
-
-
-
+  //dom播放
     setTimeout(() => {
       this.setData({
         action: {

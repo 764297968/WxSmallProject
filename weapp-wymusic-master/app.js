@@ -52,8 +52,8 @@ App({
       searchurl: "/search/get",
       newsonurl: "/personalized/newsong",
       detailurl: "/v3/playlist/detail",
-      playerurl:"/song/enhance/player/url",
-      lyricurl:"/song/lyric"
+      playerurl: "/song/enhance/player/url",
+      lyricurl: "/song/lyric"
     }
   },
   ajax(model) {
@@ -64,13 +64,13 @@ App({
     model.url = model.url;
     //get参数拼接  
     if (model.method == "get" && model.data !== undefined) {
-      var urlstr="";
+      var urlstr = "";
       for (let k in model.data) {
         if (model.data[k].toString() !== '') {
           urlstr += "&" + k + "=" + model.data[k];
         }
       }
-      model.url = model.url+"?"+urlstr.substr(1);
+      model.url = model.url + "?" + urlstr.substr(1);
       model.data = '';
     }
     //返回Promise对象  
@@ -98,31 +98,45 @@ App({
         })
       }
     )
-  },  
-  setStorage(key,value)
-  {
+  },
+  setStorage(key, value) {
     wx.setStorage({
       key: key.toString(),
       data: value,
-      success:function(res)
-      {
+      success: function (res) {
         console.log("ok");
-      },fail:function(res)
-      {
+      }, fail: function (res) {
         console.log(res);
       }
     })
-  }, getStorage(key){
-     wx.getStorage({
+  }, removeStorage:function(key)
+  {
+    wx.removeStorage({
       key: key.toString(),
-      success:function(res)
-      {
+      success: function (res) {
+        console.log("remove ok");
+      }
+    })
+  }
+  , getStorage(key) {
+    wx.getStorage({
+      key: key.toString(),
+      success: function (res) {
         console.log("ok");
         return res.data;
-      },fail:function(err)
-      {
+      }, fail: function (err) {
         console.log(err);
       }
     })
+  }, checkStorage(key) {
+    try {
+      var value = wx.getStorageSync(key)
+      if (value) {
+        return value;
+      }
+    } catch (e) {
+      return null;
+    }
+
   }
 })

@@ -20,7 +20,7 @@
         <text class='imgtext'>\n{{s.name}}</text>
       </view>
     </view>
-     <view class='recomimg' wx:for="{{song.HomeRecommend.data._list[1]}}" wx:for-item="s">
+    <view class='recomimg' wx:for="{{song.HomeRecommend.data._list[1]}}" wx:for-item="s">
       <view class='imgcon'>
         <image src='{{s.picUrl}}'></image>
         <text class='musicnum'>{{s.playCount}}</text>
@@ -31,19 +31,19 @@
   <view class='recommendcon'>
     <text style=' margin-top:100px;' class="stitle">最新音乐</text>
   </view>
-   <scroll-view scroll-y="true" class="container">
+  <scroll-view scroll-y="true" class="container">
     <block wx:for="{{recommendsongs}}" wx:for-item="song">
-      <view class="block" bindtap="newsongplayTap" data-id="{{song.id}}"  data-song="{{recommendsongs[index]}}">
+      <view class="block" bindtap="newsongplayTap" data-id="{{song.id}}" data-song="{{recommendsongs[index]}}">
         <view class="left">
           <image src="{{song.song.album.picUrl}}" mode="aspectFill" />
         </view>
         <view class="right">
           <view class="content">
-            <view >
+            <view>
               <text class="song-name">{{song.name}}</text>
             </view>
             <view>
-              <text class="song-artists" >{{song.song.album.artists[0].name}} - {{song.song.album.name}}</text>
+              <text class="song-artists">{{song.song.album.artists[0].name}} - {{song.song.album.name}}</text>
             </view>
           </view>
           <view class="play">
@@ -89,4 +89,15 @@
 <!--搜索-->
 <view name="search" wx:if="{{currentShow=='search'}}">
   搜索
+<view class="weui-search-bar">  
+ <view class="weui-search-bar__form">      
+  <view class="weui-search-bar__box">          
+   <icon class="weui-icon-search_in-box" type="search" size="14"></icon>          
+    <input type="text" class="weui-search-bar__input" placeholder="搜索" value="{{wxSearchData.value}}"                 bindfocus="wxSerchFocus" bindinput="wxSearchInput" bindblur="wxSearchBlur"  />          
+   <view class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput">              
+    <icon type="clear" size="14"></icon>          
+   </view>      
+  </view>  
+ </view> 
+</view> 
 </view>
