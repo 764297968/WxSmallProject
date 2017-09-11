@@ -34,11 +34,30 @@ Page({
     }).then(
        function (res) {
         console.log(res);
+        
+        
+       
         var result = res.result;
+        // var imgs=[];
+        // for (var i = 0; i < result.length; i++) {
+        //   imgs.push(result[i].song.album.picUrl)
+        //   var id = result[i].song.id;
+        //   wx.downloadFile({
+        //     url: result[i].song.album.picUrl,
+        //     success: function (res) {
+        //       console.log('downloadFile success, res is', res)
+        //      console.log(this.url);
+        //       $.setStorage(result[i].song.album.picUrl + "img", res.tempFilePath)
+        //       result[i].song.album.piclocalUrl = res.tempFilePath;
+        //     },
+        //     fail: function (errMsg) {
+        //       console.log('downloadFile fail, err is:', errMsg)
+        //     }
+        //   })
+        // }
         that.setData({
           recommendsongs: result
         })
-
       })
     //热歌
     $.ajax({
@@ -121,6 +140,7 @@ Page({
     {
       that.setData({
         hotshow: true,
+        searchkeyshow: false,
       })
     }else{
       $.ajax({
@@ -129,6 +149,7 @@ Page({
         header:{
           "Content-Type":"application/x-www-form-urlencoded"
         },
+        loading:false,
         data:{
           s: e.detail.value
         }
@@ -140,12 +161,16 @@ Page({
         })
       })
     }
-   
   },
   keysearch:function(e)
   {
     var that=this;
+   
     var word = e.currentTarget.dataset.val;
+    that.setData({
+      inputVal:word,
+      hotshow:false,
+    })
       $.ajax({
         url: apiurl.apiurl + apiurl.searchgeturl,
         method:"post",

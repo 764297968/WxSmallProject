@@ -60,9 +60,13 @@ App({
     }
   },
   ajax(model) {
-    wx.showLoading({
-      title: '加载中',
-    })
+    if(model.loading||model.loading==null)
+    {
+      wx.showLoading({
+        title: '加载中',
+      })
+    }
+   
     //拼接url  
     model.url = model.url;
     //get参数拼接  

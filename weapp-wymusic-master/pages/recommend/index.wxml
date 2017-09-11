@@ -9,8 +9,6 @@
 </view>
 
 
-
-
 <!--推荐-->
 <view name="recommend" wx:if="{{currentShow=='recommend'}}">
   <view class='recommendcon'>
@@ -39,7 +37,7 @@
     <block wx:for="{{recommendsongs}}" wx:for-item="song">
       <view class="block" bindtap="newsongplayTap" data-id="{{song.id}}" data-song="{{recommendsongs[index]}}">
         <view class="left">
-          <image src="{{song.song.album.picUrl}}" mode="aspectFill" />
+          <image src="{{song.song.album.piclocalUrl?song.song.album.piclocalUrl:song.song.album.picUrl}}" mode="aspectFill" />
         </view>
         <view class="right">
           <view class="content">

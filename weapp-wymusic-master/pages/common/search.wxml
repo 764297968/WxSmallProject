@@ -71,7 +71,7 @@
 
   <view class='hotsearch {{hotshow?"":"hide"}}'>
     <text class='text-mg'>热门搜索\n</text>
-    <view class='m-hotlist' wx:for="{{hots}}" wx:for-item="hot">
+    <view class='m-hotlist' bindtap='keysearch'  data-val="{{hot.first}}" wx:for="{{hots}}" wx:for-item="hot">
       {{hot.first}}
     </view>
   </view>
@@ -80,10 +80,10 @@
    <view class="weui-cell__bd weui-cell {{searchkeyshow?'':'hide'}}" >
         <view  bindtap='keysearch' data-val="{{searchtext}}" class='searchtext'>搜索"{{searchtext}}"</view>
       </view>
-    <navigator  bindtap='keysearch' data-val="{{key.keyword}}" class="weui-cell" hover-class="weui-cell_active" wx:for="{{allMatch}}" wx:for-item="key">
+    <view  bindtap='keysearch' data-val="{{key.keyword}}" class="weui-cell" hover-class="weui-cell_active" wx:for="{{allMatch}}" wx:for-item="key">
       <view class="weui-cell__bd">
         <view>{{key.keyword}}</view>
       </view>
-    </navigator>
+    </view>
   </view>
 </template>
