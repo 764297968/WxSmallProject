@@ -1277,6 +1277,9 @@
                                 t[e] && (r = o(r, "string" == typeof t[e] ? a(t[e]) : t[e]))
                             });
                             var f = u("__csrf");
+
+                            console.log(t);
+                            console.log("/////////////////////////////////////");
                             return f && (r.csrf_token = f), e = e.replace("api", "weapi") + (f ? "?" + s({
                                 csrf_token: r.csrf_token
                             }) : ""), t.method = "post", delete t.query, delete t.data, n = l(JSON.stringify(r), d(["流泪", "强"]), h, d(["爱心", "女孩", "惊恐", "大笑"])), t.body = s({
@@ -1284,6 +1287,7 @@
                                 encSecKey: n.encSecKey
                             }), p(e, t)
                         }
+
                         return p(e, t)
                     }
                     var i = n(0),

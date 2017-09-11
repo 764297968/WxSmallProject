@@ -14,6 +14,11 @@ Page({
     select: "recommend",
     recommendsongs: [],
     song: song,
+    inputShowed: false, 
+    inputVal: '',
+    hotshow:true,
+    searchsongshow:false,
+    searchkeyshow:false
   },
   onLoad: function () {
     var that = this;
@@ -45,32 +50,14 @@ Page({
         recommends: res.playlist.tracks,
       });
     })
-    // var rs = [],
-    // 	idsMap = {},
-    // 	keys = Object.keys(data),
-    // 	len = keys.length;
-
-    // for (var i = 0; i < len; i++) {
-    // 	var k = keys[i];
-
-    // 	rs.push(Object.assign({
-    // 		id: k,
-    // 	}, data[k]));
-
-    // 	idsMap[k] = {
-    // 		preid: i > 0 ? keys[i - 1] : 0,
-    // 		nextid: i < len - 1 ? keys[i + 1] : 0
-    // 	}
-    // }
-
-    // idsMap[keys[0]].preid = keys[len - 1];
-    // idsMap[keys[len - 1]].nextid = keys[0];
-
-    // // this.setData({
-    // // 	recommends: rs
-    // // });
-
-    //wx.setStorageSync('ids', idsMap);
+    //热门搜索
+    $.ajax({
+      url: apiurl.apiurl + apiurl.searchhoturl+"?type=1111",
+    }).then(function(res){
+      that.setData({
+        hots:res.result.hots
+      })
+    })
   },
   playTap: function (e) {
     const dataset = e.currentTarget.dataset;
@@ -100,5 +87,85 @@ Page({
     });
   },
   //搜索
-  
+  showInput: function () {
+    this.setData({
+      inputShowed: true
+    });
+  },
+  hideInput: function () {
+    this.setData({
+      inputVal: "",
+      inputShowed: false
+    });
+  },
+  clearInput: function () {
+    this.setData({
+      inputVal: "",
+      hotshow: true,
+      searchkeyshow:false,
+      ssshow:false
+    });
+  },
+  inputTyping: function (e) {
+    var that=this;
+    that.setData({
+      inputVal: e.detail.value,
+      hotshow: false,
+    });
+    //显示搜索文本
+    that.setData({
+      searchtext: e.detail.value 
+    })
+    //显示热搜
+    if (e.detail.value=="")
+    {
+      that.setData({
+        hotshow: true,
+      })
+    }else{
+      $.ajax({
+        url: apiurl.apiurl + apiurl.searchkeywordurl,
+        method:"post",
+        header:{
+          "Content-Type":"application/x-www-form-urlencoded"
+        },
+        data:{
+          s: e.detail.value
+        }
+      }).then(function(res){
+        console.log(res);
+        that.setData({
+          allMatch: res.result.allMatch,
+          searchkeyshow:true
+        })
+      })
+    }
+   
+  },
+  keysearch:function(e)
+  {
+    var that=this;
+    var word = e.currentTarget.dataset.val;
+      $.ajax({
+        url: apiurl.apiurl + apiurl.searchgeturl,
+        method:"post",
+        header: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        data:{
+          limit:20,
+          offset:0,
+          queryCorrect:true,
+          s:word,
+          strategy:5,
+          type:1
+        }
+      }).then(function(res){
+        that.setData({
+          searchsongs:   res.result.songs,
+          ssshow:true,
+          searchkeyshow:false
+        })
+      })
+  }
 })

@@ -53,7 +53,10 @@ App({
       newsonurl: "/personalized/newsong",
       detailurl: "/v3/playlist/detail",
       playerurl: "/song/enhance/player/url",
-      lyricurl: "/song/lyric"
+      lyricurl: "/song/lyric",
+      searchhoturl:"/search/hot",
+      searchkeywordurl:"/search/suggest/keyword",
+      searchgeturl:"/search/get",
     }
   },
   ajax(model) {
@@ -80,6 +83,7 @@ App({
           method: model.method,
           url: model.url,
           data: model.data,
+          header:model.header,
           dataType: model.dataType ? null : model.dataType,
           success: (res) => {
             wx.hideLoading()
@@ -129,6 +133,7 @@ App({
       }
     })
   }, checkStorage(key) {
+    //return null;
     try {
       var value = wx.getStorageSync(key)
       if (value) {
