@@ -76,8 +76,8 @@
     </view>
   </view>
 
-  <view class="weui-cells searchbar-result" wx:if="{{searchkeyshow}}">
-   <view class="weui-cell__bd weui-cell {{searchkeyshow?'':'hide'}}" >
+  <view class="weui-cells searchbar-result  {{searchkeyshow?'':'hide'}}"  >
+   <view class="weui-cell__bd weui-cell" >
         <view  bindtap='keysearch' data-val="{{searchtext}}" class='searchtext'>搜索"{{searchtext}}"</view>
       </view>
     <view  bindtap='keysearch' data-val="{{key.keyword}}" class="weui-cell" hover-class="weui-cell_active" wx:for="{{allMatch}}" wx:for-item="key">
