@@ -206,6 +206,7 @@ Page({
         title: song.name,
         picurl: song.al.picUrl,
         src: song.url,
+        picId_str: song.album.picId_str,
         action: {
           method: 'setCurrentTime',
           data: 0
@@ -213,6 +214,7 @@ Page({
         lyricList: that.getLyricList(song),
         favlist: favUtil.getFavList()
       });
+      console.log(song);
       var mp3url = $.checkStorage(id + "mp3");
       if (!mp3url)
       {

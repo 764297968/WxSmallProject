@@ -14,6 +14,7 @@ Page({
     select: "recommend",
     recommendsongs: [],
     song: song,
+    navigation: appdata.navigation,
     inputShowed: false, 
     inputVal: '',
     hotshow:true,
@@ -38,23 +39,29 @@ Page({
         
        
         var result = res.result;
-        // var imgs=[];
-        // for (var i = 0; i < result.length; i++) {
-        //   imgs.push(result[i].song.album.picUrl)
-        //   var id = result[i].song.id;
+        var imgs=[];
+
+        // result.forEach(function (value, index, array) {
+        //   var img = $.getStorage(value.song.album.picUrl + "img");
+        //   if (!img)
+        //   {
         //   wx.downloadFile({
-        //     url: result[i].song.album.picUrl,
+        //     url: value.song.album.picUrl,
         //     success: function (res) {
         //       console.log('downloadFile success, res is', res)
-        //      console.log(this.url);
-        //       $.setStorage(result[i].song.album.picUrl + "img", res.tempFilePath)
-        //       result[i].song.album.piclocalUrl = res.tempFilePath;
+        //       console.log(this.url);
+        //       $.setStorage(value.song.album.picUrl + "img", res.tempFilePath)
+        //       value.song.album.piclocalUrl = res.tempFilePath;
         //     },
         //     fail: function (errMsg) {
         //       console.log('downloadFile fail, err is:', errMsg)
         //     }
         //   })
-        // }
+        //   }else{
+        //     value.song.album.piclocalUrl =img;
+        //   }
+        // });
+      
         that.setData({
           recommendsongs: result
         })
