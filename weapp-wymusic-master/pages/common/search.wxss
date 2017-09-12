@@ -1,0 +1,17 @@
+.m-hotlist{
+  float: left;
+  border-radius: 30px;
+  border: 1px solid gray;
+  padding: 5px 10px;
+  margin:5px;
+}
+.text-mg{
+  margin: 15px 0px 10px 5px;
+}
+.hotsearch{
+  margin: 0 auto;
+  margin-left: 5px;
+}
+.searchtext{
+  color: blue;
+}
