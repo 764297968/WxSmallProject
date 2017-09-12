@@ -1,11 +1,21 @@
+<!-- <import src="../searchbar/searchbar.wxml" /> -->
+<import src="../common/search.wxml" />
+<import src="../searchbar/searchbar.wxss" />
+
 <view style="height: 40px;">
-  <view data-name="recommend" bindtap='showNavigation' class="navigation {{select=='recommend'?'active':''}}">推荐音乐</view>
-  <view data-name="husband" bindtap='showNavigation' class="navigation {{select=='husband'?'active':''}}">热歌榜</view>
-  <view data-name="search" bindtap='showNavigation' class="navigation {{select=='search'?'active':''}}">搜索</view>
+  <view data-name="recommend" bindtap='showNavigation' class="navigation ">
+    <text class="{{select=='recommend'?'active':''}}">推荐音乐</text>
+  </view>
+  <view data-name="husband" bindtap='showNavigation' class="navigation ">
+    <text class="{{select=='husband'?'active':''}}">热歌榜
+    </text>
+  </view>
+  <view data-name="search" bindtap='showNavigation' class="navigation">
+    <text class=" {{select=='search'?'active':''}}">搜索</text>
+  </view>
 </view>
-
-
-
+<hr/>
+              
 
 <!--推荐-->
 <view name="recommend" wx:if="{{currentShow=='recommend'}}">
@@ -34,15 +44,17 @@
   <scroll-view scroll-y="true" class="container">
     <block wx:for="{{recommendsongs}}" wx:for-item="song">
       <view class="block" bindtap="newsongplayTap" data-id="{{song.id}}" data-song="{{recommendsongs[index]}}">
-        <view class="left">
-          <image src="{{song.song.album.picUrl}}" mode="aspectFill" />
-        </view>
+
         <view class="right">
           <view class="content">
-            <view>
-              <text class="song-name">{{song.name}}</text>
+            <view  class="song-name"> 
+          
+              <text>{{song.name}} <text wx:for="{{song.song.alias}}" wx:for-item="sa">{{sa}}</text>
+              </text>
+              
             </view>
             <view>
+              <image src='../../images/sq.png' class='rem-ion'></image>
               <text class="song-artists">{{song.song.album.artists[0].name}} - {{song.song.album.name}}</text>
             </view>
           </view>
@@ -88,16 +100,28 @@
 </view>
 <!--搜索-->
 <view name="search" wx:if="{{currentShow=='search'}}">
-  搜索
-<view class="weui-search-bar">  
- <view class="weui-search-bar__form">      
-  <view class="weui-search-bar__box">          
-   <icon class="weui-icon-search_in-box" type="search" size="14"></icon>          
-    <input type="text" class="weui-search-bar__input" placeholder="搜索" value="{{wxSearchData.value}}"                 bindfocus="wxSerchFocus" bindinput="wxSearchInput" bindblur="wxSearchBlur"  />          
-   <view class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput">              
-    <icon type="clear" size="14"></icon>          
-   </view>      
-  </view>  
- </view> 
-</view> 
+  <template is="search3" data="{{inputShowed: inputShowed,inputVal:inputVal,hots:hots,hotshow:hotshow,searchtext:searchtext,allMatch:allMatch,searchsong:searchsong,searchsongshow:searchsongshow,searchkeyshow:searchkeyshow,searchsongs:searchsongs}}" />
+  <scroll-view scroll-y="true" class="container {{ssshow?'':'hide'}}">
+    <block wx:for="{{searchsongs}}" wx:for-item="ss">
+      <view class="block" bindtap="playTap" data-id="{{ss.id}}" data-index="{{index}}" data-song="{{searchsongs[index]}}">
+        <view class="left">
+          <image src="{{ss.al.picUrl}}" lazy-load="true" mode="aspectFill" />
+        </view>
+        <view class="right">
+          <view class="content">
+            <view>
+              <text class="song-name">{{ss.name}}</text>
+            </view>
+            <view>
+              <text class="song-artists">{{ss.ar[0].name}} - {{ss.al.name}}</text>
+            </view>
+          </view>
+          <view class="play">
+            <image src="../../images/more.png" mode="scaleToFill" />
+          </view>
+        </view>
+      </view>
+    </block>
+  </scroll-view>
+
 </view>

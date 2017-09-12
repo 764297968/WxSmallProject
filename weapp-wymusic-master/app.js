@@ -53,13 +53,20 @@ App({
       newsonurl: "/personalized/newsong",
       detailurl: "/v3/playlist/detail",
       playerurl: "/song/enhance/player/url",
-      lyricurl: "/song/lyric"
+      lyricurl: "/song/lyric",
+      searchhoturl:"/search/hot",
+      searchkeywordurl:"/search/suggest/keyword",
+      searchgeturl:"/search/get",
     }
   },
   ajax(model) {
-    wx.showLoading({
-      title: '加载中',
-    })
+    if(model.loading||model.loading==null)
+    {
+      wx.showLoading({
+        title: '加载中',
+      })
+    }
+   
     //拼接url  
     model.url = model.url;
     //get参数拼接  
@@ -80,6 +87,7 @@ App({
           method: model.method,
           url: model.url,
           data: model.data,
+          header:model.header,
           dataType: model.dataType ? null : model.dataType,
           success: (res) => {
             wx.hideLoading()
@@ -129,6 +137,7 @@ App({
       }
     })
   }, checkStorage(key) {
+    //return null;
     try {
       var value = wx.getStorageSync(key)
       if (value) {

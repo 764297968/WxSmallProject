@@ -33,6 +33,7 @@
                 <view class="wxSearchHistoryEmpty">搜索历史为空</view>
             </view>
         </view>
+      
     </view>
   </view>
 </template>

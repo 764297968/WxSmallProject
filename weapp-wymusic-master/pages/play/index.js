@@ -206,6 +206,7 @@ Page({
         title: song.name,
         picurl: song.al.picUrl,
         src: song.url,
+        picId_str: song.album.picId_str,
         action: {
           method: 'setCurrentTime',
           data: 0

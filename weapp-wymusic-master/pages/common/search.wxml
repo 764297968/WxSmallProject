@@ -1,11 +1,89 @@
-<view class="weui-search-bar">  
- <view class="weui-search-bar__form">      
-  <view class="weui-search-bar__box">          
-   <icon class="weui-icon-search_in-box" type="search" size="14"></icon>          
-    <input type="text" class="weui-search-bar__input" placeholder="搜索" value="{{wxSearchData.value}}"                 bindfocus="wxSerchFocus" bindinput="wxSearchInput" bindblur="wxSearchBlur"  />          
-   <view class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput">              
-    <icon type="clear" size="14"></icon>          
-   </view>      
-  </view>  
- </view> 
-</view> 
+<template name="search1">
+  <view class="page__bd">
+    <view class="weui-search-bar">
+      <view class="weui-search-bar__form">
+        <view class="weui-search-bar__box">
+          <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+          <input type="text" class="weui-search-bar__input" placeholder="搜索" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputTyping" />
+          <view class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput">
+            <icon type="clear" size="14"></icon>
+          </view>
+        </view>
+        <label class="weui-search-bar__label" hidden="{{inputShowed}}" bindtap="showInput">
+          <icon class="weui-icon-search" type="search" size="14"></icon>
+          <view class="weui-search-bar__text">搜索</view>
+        </label>
+      </view>
+      <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">取消</view>
+    </view>
+    <view class="weui-cells searchbar-result" wx:if="{{inputVal.length > 0}}">
+      <navigator url="" class="weui-cell" hover-class="weui-cell_active">
+        <view class="weui-cell__bd">
+          <view>实时搜索文本</view>
+        </view>
+      </navigator>
+      <navigator url="" class="weui-cell" hover-class="weui-cell_active">
+        <view class="weui-cell__bd">
+          <view>实时搜索文本</view>
+        </view>
+      </navigator>
+      <navigator url="" class="weui-cell" hover-class="weui-cell_active">
+        <view class="weui-cell__bd">
+          <view>实时搜索文本</view>
+        </view>
+      </navigator>
+      <navigator url="" class="weui-cell" hover-class="weui-cell_active">
+        <view class="weui-cell__bd">
+          <view>实时搜索文本</view>
+        </view>
+      </navigator>
+    </view>
+  </view>
+</template>
+<template name="search2">
+  <view class="weui-search-bar">
+    <view class="weui-search-bar__form">
+      <view class="weui-search-bar__box">
+        <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+        <input type="text" class="weui-search-bar__input" placeholder="搜索" value="{{wxSearchData.value}}" bindfocus="wxSerchFocus" bindinput="wxSearchInput" bindblur="wxSearchBlur" />
+        <view class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput">
+          <icon type="clear" size="14"></icon>
+        </view>
+      </view>
+    </view>
+  </view>
+</template>
+<template name="search3">
+  <view class="weui-search-bar">
+    <view class="weui-search-bar__form">
+      <view class="weui-search-bar__box">
+        <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+        <input type="text" class="weui-search-bar__input" placeholder="搜索" value="{{inputVal}}" bindinput="inputTyping" />
+        <icon class="weui-icon-cancel {{inputShowed?'':'hide'}}" color='gray' type="cancel" size="14"></icon>
+
+        <view class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput">
+          <icon type="clear" size="14"></icon>
+        </view>
+      </view>
+    </view>
+
+  </view>
+
+  <view class='hotsearch {{hotshow?"":"hide"}}'>
+    <text class='text-mg'>热门搜索\n</text>
+    <view class='m-hotlist' bindtap='keysearch'  data-val="{{hot.first}}" wx:for="{{hots}}" wx:for-item="hot">
+      {{hot.first}}
+    </view>
+  </view>
+
+  <view class="weui-cells searchbar-result" wx:if="{{searchkeyshow}}">
+   <view class="weui-cell__bd weui-cell {{searchkeyshow?'':'hide'}}" >
+        <view  bindtap='keysearch' data-val="{{searchtext}}" class='searchtext'>搜索"{{searchtext}}"</view>
+      </view>
+    <view  bindtap='keysearch' data-val="{{key.keyword}}" class="weui-cell" hover-class="weui-cell_active" wx:for="{{allMatch}}" wx:for-item="key">
+      <view class="weui-cell__bd">
+        <view>{{key.keyword}}</view>
+      </view>
+    </view>
+  </view>
+</template>
