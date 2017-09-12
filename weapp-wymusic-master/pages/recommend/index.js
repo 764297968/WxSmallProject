@@ -84,10 +84,19 @@ Page({
         hots:res.result.hots
       })
     })
+
+    
+
+    // this.setData({
+    // 	recommends: rs
+    // });
+
+    wx.setStorageSync('ids', idsMap);
   },
   playTap: function (e) {
     const dataset = e.currentTarget.dataset;
     wx.setStorageSync(dataset.id.toString(), dataset.song);
+
     wx.navigateTo({
       url: `../play/index?id=${dataset.id}`
     })
@@ -100,6 +109,39 @@ Page({
     dataset.song.song.h.br=dataset.song.song.bMusic.bitrate;
     dataset.song.song.al.picUrl = dataset.song.song.album.picUrl;
     wx.setStorageSync(dataset.id.toString(), dataset.song.song);
+
+
+    // var rs = [],
+    //   idsMap = {},
+    //   keys = Object.keys(data),
+    //   len = keys.length;
+
+    // for (var i = 0; i < len; i++) {
+    //   var k = keys[i];
+
+    //   rs.push(Object.assign({
+    //     id: k,
+    //   }, data[k]));
+
+    //   idsMap[k] = {
+    //     preid: i > 0 ? keys[i - 1] : 0,
+    //     nextid: i < len - 1 ? keys[i + 1] : 0
+    //   }
+    // }
+
+    // idsMap[keys[0]].preid = keys[len - 1];
+    // idsMap[keys[len - 1]].nextid = keys[0];
+    var idsMap = [];
+    var recommendsongs = this.data.recommendsongs;
+      recommendsongs.forEach(function (value, index, arr) {
+      idsMap.push({
+        preid:index>0?index-1:0,
+        nextid: index < recommendsongs.length?index+1:0
+      });
+    })
+
+
+
     wx.navigateTo({
       url: `../play/index?id=${dataset.id}`
     })

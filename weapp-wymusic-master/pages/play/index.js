@@ -214,7 +214,6 @@ Page({
         lyricList: that.getLyricList(song),
         favlist: favUtil.getFavList()
       });
-      console.log(song);
       var mp3url = $.checkStorage(id + "mp3");
       if (!mp3url)
       {
