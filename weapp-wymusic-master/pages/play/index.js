@@ -2,7 +2,7 @@ var data = require('../../utils/data.js').songs;
 var favUtil = require('../../utils/fav.js');
 var strRe = /\[(\d{2}:\d{2})\.\d{2,}\](.*)/;
 var $ = getApp();
-var apiurl = $.globalData.api;
+var apiurl = $.globalData.api; 
 Page({
   data: {
     toastHidden: true,

@@ -103,7 +103,7 @@ Page({
     wx.setStorageSync(dataset.id.toString(), dataset.song);
     
     wx.navigateTo({
-      url: `../play/index?id=${dataset.id}`
+      url: `../playsong/index?id=${dataset.id}`
     })
   },
   newsongplayTap:function(e)
@@ -117,7 +117,7 @@ Page({
 
    this.getidsMaps(this.data.recommendsongs);
     wx.navigateTo({
-      url: `../play/index?id=${dataset.id}`
+      url: `../playsong/index?id=${dataset.id}`
     })
   },
   getidsMaps:function(data)
