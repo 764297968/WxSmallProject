@@ -1,5 +1,5 @@
 
-<audio src="{{src}}" action="{{action}}" binderror="errorEvent" bindtimeupdate="timeupdateEvent" bindended="endEvent"></audio>
+<audio src="{{src}}" id="myAudio" action="{{action}}" binderror="errorEvent" bindtimeupdate="timeupdateEvent" bindended="endEvent"></audio>
 <image class="play-bg" mode="aspectFill" src="http://music.163.com/api/img/blur/{{picId_str}}" ></image>
 <image wx:if="{{lyricHidden}}" bindtap="switchbgEvent" class="trun-bg" mode="aspectFill" src="{{picurl}}" style="transform: translateX(-50%) rotate({{deg}}deg);"></image>
 <view wx:if="{{!lyricHidden}}" id="container" class="play-container" animation="{{animationData}}" bindtap="switchbgEvent">
@@ -12,7 +12,7 @@
 	<view class="progress">
 		<text>{{timeText}}</text>
 		<!-- <progress percent="{{per}}" bindtap='changeprogress' color="red" stroke-width="4"/> -->
-     <slider class="slider" min="0" max="100" step="1" value="{{per}}" activeColor="red" bindtap="seek"></slider>
+     <slider class="slider" min="0" max="100" step="1" value="{{per}}" activeColor="red" bindchange="seek"></slider>
 		<text>{{durationText}}</text>
 	</view>
   	<view class="controls">

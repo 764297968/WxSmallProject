@@ -11554,6 +11554,8 @@ setMaxDigits(20), dpl10 = 15, lr10 = biFromNumber(1e15), hexatrigesimalToChar = 
     };
     var cqb2x = v5A.bp5u;
     v5A.bp5u = function (V5a, e4i) {
+        console.log(V5a);
+        console.log(e4i);
         var j4n = {},
             e4i = NEJ.X({}, e4i),
             lo9f = V5a.indexOf("?");

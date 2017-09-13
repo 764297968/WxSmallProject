@@ -29,6 +29,7 @@ Page({
   },
   onReady: function () {
     this.reload(this.data.currentId);
+    this.audioCtx = wx.createAudioContext('myAudio')
   },
   onShow: function () {
     this.animation = wx.createAnimation({
@@ -44,6 +45,7 @@ Page({
   },
   errorEvent: function (e) {
     console.log("加载资源失败 code：", e.detail.errMsg);
+    console.log(this.idsMap[Number(this.data.currentId)]);
     this.reload(this.idsMap[Number(this.data.currentId)].nextid);
   },
   prevEvent: function (e) {
@@ -144,14 +146,13 @@ Page({
         animationData: this.animation.export()
       });
     }
-
-    // //console.log(t);
     // console.log(t / d * 100);
     // console.log(Math.ceil(t / d * 100))
     this.setData({
       per: Math.ceil(t / d * 100),
       timeText: this.formatTime(t),
-      durationText: this.formatTime(d)
+      durationText: this.formatTime(d),
+      durationNum:d
     });
 
     if (!this.turner && this.data.status === 'play') {
@@ -201,7 +202,7 @@ Page({
         currentTime: '0',
         currentIndex: -1,
         timeText: '00:00',
-        durationText: '',
+        durationText: '00:00',
         animationData: that.animation.export(),
         title: song.name,
         picurl: song.al.picUrl,
@@ -246,7 +247,7 @@ Page({
       //     console.log(err);
       //   }
       // })
-      //$.removeStorage(id);
+      $.removeStorage(id);
     })
 
   //dom播放
@@ -365,31 +366,12 @@ Page({
   },
   seek: function (e) {
     console.log(e);
-    
-    // e.detail.value
-    // this.setData({
-    //   per: Math.ceil(t / d * 100),
-    //   timeText: this.formatTime(t),
-    //   durationText: this.formatTime(d)
-    // });
-    wx.getBackgroundAudioPlayerState({
-      success:function(res)
-      {
-        console.log(res);
-      }
+    this.setData({
+      per:e.detail.value
     })
-    // wx.seekBackgroundAudio({
-    //   position: e.detail.value,
-    // })
-    // wx.seekBackgroundAudio({
-    //   position: e.detail.value,
-    //   complete: function () {
-    //     // 实际会延迟两秒左右才跳过去
-    //     setTimeout(function () {
-    //       that._enableInterval()
-    //     }, 2000)
-    //   }
-    // })
+    this.audioCtx.pause();
+    this.audioCtx.seek(this.data.durationNum*e.detail.value/100);
+    this.audioCtx.play();
   },
   
 })
