@@ -139,8 +139,7 @@ Page({
         nextid: index < recommendsongs.length?index+1:0
       });
     })
-
-
+    wx.setStorageSync('ids', idsMap);
 
     wx.navigateTo({
       url: `../play/index?id=${dataset.id}`
