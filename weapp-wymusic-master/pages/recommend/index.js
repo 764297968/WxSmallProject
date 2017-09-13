@@ -91,12 +91,17 @@ Page({
     // 	recommends: rs
     // });
 
-    wx.setStorageSync('ids', idsMap);
+    //wx.setStorageSync('ids', idsMap);
   },
   playTap: function (e) {
     const dataset = e.currentTarget.dataset;
+    if (this.data.select == 'husband') {
+      this.getidsMaps(this.data.recommends);
+    } else {
+      this.getidsMaps(this.data.searchsongs);
+    }
     wx.setStorageSync(dataset.id.toString(), dataset.song);
-
+    
     wx.navigateTo({
       url: `../play/index?id=${dataset.id}`
     })
@@ -110,40 +115,23 @@ Page({
     dataset.song.song.al.picUrl = dataset.song.song.album.picUrl;
     wx.setStorageSync(dataset.id.toString(), dataset.song.song);
 
-
-    // var rs = [],
-    //   idsMap = {},
-    //   keys = Object.keys(data),
-    //   len = keys.length;
-
-    // for (var i = 0; i < len; i++) {
-    //   var k = keys[i];
-
-    //   rs.push(Object.assign({
-    //     id: k,
-    //   }, data[k]));
-
-    //   idsMap[k] = {
-    //     preid: i > 0 ? keys[i - 1] : 0,
-    //     nextid: i < len - 1 ? keys[i + 1] : 0
-    //   }
-    // }
-
-    // idsMap[keys[0]].preid = keys[len - 1];
-    // idsMap[keys[len - 1]].nextid = keys[0];
-    var idsMap = [];
-    var recommendsongs = this.data.recommendsongs;
-      recommendsongs.forEach(function (value, index, arr) {
-      idsMap.push({
-        preid:index>0?index-1:0,
-        nextid: index < recommendsongs.length?index+1:0
-      });
-    })
-    wx.setStorageSync('ids', idsMap);
-
+   this.getidsMaps(this.data.recommendsongs);
     wx.navigateTo({
       url: `../play/index?id=${dataset.id}`
     })
+  },
+  getidsMaps:function(data)
+  {
+    var idsMap = {};
+    //var recommendsongs = this.data.recommendsongs;
+    data.forEach(function (value, index, arr) {
+      idsMap[value.id] = {
+        preid: index > 0 ? arr[index - 1].id : value.id,
+        nextid: index < data.length - 1 ? arr[index + 1].id : value.id
+      };
+    })
+    console.log(idsMap);
+    wx.setStorageSync('ids', idsMap);
   },
   showNavigation: function (event) {
     var that = this;
