@@ -11,7 +11,7 @@
 	<view class="progress">
 		<text>{{formatedPlayTime}}</text>
 		<!-- <progress percent="{{per}}" bindtap='changeprogress' color="red" stroke-width="4"/> -->
-     <slider class="slider" min="0" max="100" step="1" value="{{playTime}}" activeColor="red" bindchange="seek"></slider>
+     <slider class="slider" min="0" max="100"   value="{{playTime}}" activeColor="red" bindchange="seek"></slider>
 		<text>{{durationText}}</text>
 	</view>
   	<view class="controls">

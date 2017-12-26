@@ -11,6 +11,7 @@
  
   <text   bindtap="bindtapmunu">{{motto}}\n</text>
   <text   bindtap="bindtapnews">{{news}}</text>
+    <text   bindtap="bindtapfile">{{files}}</text>
  <view> {{m1.message}} </view>
 
 </view>

@@ -1,0 +1,2 @@
+<!--pages/File/index.wxml-->
+<text bindtap='uploadimg'>上传图片</text>

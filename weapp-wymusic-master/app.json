@@ -1,9 +1,8 @@
 {
   "pages": [
-    
+    "pages/my/index",
     "pages/recommend/index",
     "pages/play/index",
-    "pages/my/index",
     "pages/searchbar/searchbar",
     "pages/playsong/index"
   ],

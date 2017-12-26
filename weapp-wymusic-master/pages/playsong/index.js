@@ -65,7 +65,22 @@ Page({
   },
    play: function (song) {
     var that = this;
-    console.log(song.url);
+    var mp3url = $.checkStorage(song.id + "mp3");
+    if (!mp3url) {
+      wx.downloadFile({
+        url: song.url,
+        success: function (res) {
+          console.log('downloadFile success, res is', res)
+          $.setStorage(song.id + "mp3", res.tempFilePath)
+        },
+        fail: function (errMsg) {
+          console.log('downloadFile fail, err is:', errMsg)
+        }
+      })
+    } else {
+      song.url=mp3url;
+    }
+    console.log(mp3url);
     wx.playBackgroundAudio({
       dataUrl: song.url,
       title: song.name,
@@ -74,10 +89,14 @@ Page({
         console.log(res);
         that.setData({
           playing: true,
-          durationText: util.formatTime(song.duration/1000)
+          durationText: util.formatTime((song.duration ? song.duration : song.dt) / 1000)
         })
       }
     })
+    
+    wx.setNavigationBarTitle({
+      title: song.name
+    });
     this._enableInterval()
    // app.globalData.backgroundAudioPlaying = true
   },
@@ -89,6 +108,8 @@ Page({
        
        wx.getBackgroundAudioPlayerState({
          success: function (res) {
+           console.log("cur"+res.currentPosition);
+           console.log("dur" + res.duration);
            that.setData({
              playTime: Math.floor(res.currentPosition / (that.data.song.duration / 100000)),
              formatedPlayTime: util.formatTime(res.currentPosition + 1),
@@ -102,6 +123,14 @@ Page({
      var that = this
      wx.seekBackgroundAudio({
        position: e.detail.value,
+       success:function(res)
+       {
+         console.log(res);
+       },
+       fail:function(err)
+       {
+         console.log(err);
+       },
        complete: function () {
          // 实际会延迟两秒左右才跳过去
          setTimeout(function () {

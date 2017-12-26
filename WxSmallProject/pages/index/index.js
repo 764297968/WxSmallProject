@@ -5,8 +5,8 @@ Page({
   data: {
     motto: '点击此处进入小程序',
     userInfo: {},
-    news:"去看商品"
-     
+    news:"去看商品",
+    files:"上传文件"
   },
   //事件处理函数
   bindViewTap: function() {
@@ -24,6 +24,11 @@ Page({
     wx.navigateTo({
           url:"../ProductShow/ProductShow"
         })
+  },
+  bindtapfile:function(){
+    wx.navigateTo({
+      url: "../File/index"
+    })
   },
   onLoad: function () {
     //console.log(data.motto);

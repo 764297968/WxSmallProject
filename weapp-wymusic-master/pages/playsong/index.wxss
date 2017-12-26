@@ -1,4 +1,4 @@
-/* page {
+ page {
 	overflow: hidden;
 	background: radial-gradient(rgba(0,0,0,.5) 30%, rgba(0,0,0,1));
 }
@@ -152,4 +152,4 @@
 }
 .slider{
   width: 100%;
-} */
+} 

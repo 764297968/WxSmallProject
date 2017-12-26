@@ -1,12 +1,13 @@
 {
   "pages":[
-    "pages/ProductShow/ProductShow",
     "pages/index/index",
+    "pages/ProductShow/ProductShow",
     "pages/logs/logs",
     "pages/menu/menu",
     "pages/PictureShow/PictureShow",
    
-    "pages/ProductDetail/ProductDetail"
+    "pages/ProductDetail/ProductDetail",
+    "pages/File/index"
   ],
   "window":{
     "backgroundTextStyle":"light",

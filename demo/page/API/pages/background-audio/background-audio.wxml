@@ -10,7 +10,7 @@
       <slider class="slider" min="0" max="269" step="1" value="{{playTime}}" bindchange="seek"></slider>
       <view class="play-time">
         <text>00:00</text>
-        <text>04:29</text>
+        <text>{{duration}}</text>
       </view>
     </view>
     <view class="page-body-text tc">注意：离开当前页面后背景音乐将保持播放，但退出小程序将停止</view>
